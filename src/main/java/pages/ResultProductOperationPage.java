@@ -6,10 +6,8 @@ import org.openqa.selenium.support.FindBy;
 
 public class ResultProductOperationPage extends BasePage {
 
-    @FindBy(xpath = "//p[text()='Покупка успешно завершена!']")
-    private WebElement successBuyMessage;
-    @FindBy(xpath = "//p[text()='Продажа успешно завершена!']")
-    private WebElement successSellMessage;
+    @FindBy(xpath = "//p[text()='Операция успешно завершена!']")
+    private WebElement successMessage;
     @FindBy(xpath = "(//ul/li)[1]/span")
     private WebElement storeNameField;
     @FindBy(xpath = "(//ul/li)[2]/span")
@@ -28,13 +26,7 @@ public class ResultProductOperationPage extends BasePage {
     }
 
     public String getSuccessText() {
-        if (successBuyMessage.isDisplayed()) {
-            return successBuyMessage.getText();
-        } else if (successSellMessage.isDisplayed()) {
-            return successSellMessage.getText();
-        } else {
-            return "Статус не определён";
-        }
+        return successMessage.getText();
     }
 
     public String getStoreName() {
