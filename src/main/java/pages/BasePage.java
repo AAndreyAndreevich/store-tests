@@ -9,12 +9,12 @@ public class BasePage {
 
     protected WebDriver driver;
 
-    @FindBy(css = "a[href='/logout']")
-    private WebElement logout;
     @FindBy(css = "button[type='submit']")
     private WebElement submitButton;
     @FindBy(css = "a[href='/home']")
     private WebElement backToHome;
+    @FindBy(css = "a[href='/logout']")
+    private WebElement logout;
 
     public BasePage(WebDriver driver) {
         this.driver = driver;

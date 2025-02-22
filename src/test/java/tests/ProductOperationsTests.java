@@ -10,16 +10,16 @@ import utils.BaseTest;
 
 public class ProductOperationsTests extends BaseTest {
 
-    private final MainPage mainPage = new MainPage(driver);
-    private final LoginAndRegistrationPage loginPage = new LoginAndRegistrationPage(driver);
-    private final ProductOperationPage productOperation = new ProductOperationPage(driver);
-    private final ResultProductOperationPage resultOperation = new ResultProductOperationPage(driver);
+    private MainPage mainPage;
+    private LoginAndRegistrationPage loginPage;
+    private ProductOperationPage productOperation;
+    private ResultProductOperationPage resultOperation;
 
     private final String URL = "http://localhost:8080/";
 
     @Test
     public void buyProductTest() throws Exception {
-        driver.get(URL);
+        setSettingDriver();
 
         loginPage.loginIn("user", "user");
 
@@ -37,4 +37,11 @@ public class ProductOperationsTests extends BaseTest {
         Assertions.assertEquals(resultOperation.getProductName(), "Хлеб");
     }
 
+    private void setSettingDriver() {
+        driver.get(URL);
+        mainPage = new MainPage(driver);
+        loginPage = new LoginAndRegistrationPage(driver);
+        productOperation = new ProductOperationPage(driver);
+        resultOperation = new ResultProductOperationPage(driver);
+    }
 }

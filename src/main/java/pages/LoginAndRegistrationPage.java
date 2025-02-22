@@ -3,8 +3,11 @@ package pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
-public class LoginAndRegistrationPage extends BasePage {
+public class LoginAndRegistrationPage {
+
+    private WebDriver driver;
 
     @FindBy(css = "input[name='username']")
     private WebElement usernameField;
@@ -12,9 +15,12 @@ public class LoginAndRegistrationPage extends BasePage {
     private WebElement passwordField;
     @FindBy(css = "a[href='/registration']")
     private WebElement registrationButton;
+    @FindBy(css = "button[type='submit']")
+    private WebElement submitButton;
 
     public LoginAndRegistrationPage(WebDriver driver) {
-        super(driver);
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
     }
 
     public void enterUsername(String text) {
@@ -22,7 +28,11 @@ public class LoginAndRegistrationPage extends BasePage {
     }
 
     public void enterPassword(String text) {
-        usernameField.sendKeys(text);
+        passwordField.sendKeys(text);
+    }
+
+    public void clickSubmit() {
+        submitButton.click();
     }
 
     public void clickRegistration() {
