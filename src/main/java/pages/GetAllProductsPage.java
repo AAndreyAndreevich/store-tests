@@ -10,6 +10,8 @@ public class GetAllProductsPage extends BasePage {
     private WebElement store;
     @FindBy(css = "button[onclick='submitGetAllProductsForm()']")
     private WebElement submit;
+    @FindBy(id = "getAllProductsResult")
+    private WebElement result;
 
     public GetAllProductsPage(WebDriver driver) {
         super(driver);
@@ -17,6 +19,10 @@ public class GetAllProductsPage extends BasePage {
 
     public void storeSetValue(String text) {
         store.sendKeys(text);
+    }
+
+    public String getAllProductsResult() {
+        return result.getText();
     }
 
     public void clickSubmit() {
