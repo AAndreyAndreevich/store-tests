@@ -8,28 +8,21 @@ import org.openqa.selenium.support.PageFactory;
 public class BasePage {
 
     protected WebDriver driver;
-
-    @FindBy(css = "button[type='submit']")
-    private WebElement submitButton;
     @FindBy(css = "a[href='/home']")
-    private WebElement backToHome;
+    private WebElement homeButton;
     @FindBy(css = "a[href='/logout']")
-    private WebElement logout;
+    private WebElement logoutButton;
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
 
-    public void logout() {
-        logout.click();
+    public void clickToHome() {
+        homeButton.click();
     }
 
-    public void clickSubmit() {
-        submitButton.click();
-    }
-
-    public void clickBackToHome() {
-        backToHome.click();
+    public void clickLogout() {
+        logoutButton.click();
     }
 }

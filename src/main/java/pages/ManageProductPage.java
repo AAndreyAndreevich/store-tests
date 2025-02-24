@@ -4,16 +4,20 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class ProductOperationPage extends BasePage {
+public class ManageProductPage extends BasePage {
 
     @FindBy(id = "storeId")
     private WebElement storeIdField;
     @FindBy(id = "productId")
     private WebElement productIdField;
     @FindBy(id = "count")
-    private WebElement countInput;
+    private WebElement countField;
+    @FindBy(css = "button[onclick='submitForm('BUY_PRODUCT')']")
+    private WebElement buyButton;
+    @FindBy(css = "button[onclick='submitForm('SELL_PRODUCT')']")
+    private WebElement sellButton;
 
-    public ProductOperationPage(WebDriver driver) {
+    public ManageProductPage(WebDriver driver) {
         super(driver);
     }
 
@@ -26,6 +30,15 @@ public class ProductOperationPage extends BasePage {
     }
 
     public void enterCount(String text) {
-        countInput.sendKeys(text);
+        countField.sendKeys(text);
     }
+
+    public void buyClick() {
+        buyButton.click();
+    }
+
+    public void sellClick() {
+        sellButton.click();
+    }
+
 }

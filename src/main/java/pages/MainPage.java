@@ -6,38 +6,27 @@ import org.openqa.selenium.support.FindBy;
 
 public class MainPage extends BasePage {
 
-    @FindBy(css = "a[href='/inv/buyProductForm']")
-    private WebElement buyProductPage;
-    @FindBy(css = "a[href='/inv/sellProductForm']")
-    private WebElement sellProductPage;
+    @FindBy(css = "a[href='/inv/manageProductForm']")
+    private WebElement manageButton;
     @FindBy(css = "a[href='/inv/getAllProductsForm']")
-    private WebElement getAllProductPage;
+    private WebElement getProductsButton;
     @FindBy(css = "a[href='/store/createStoreForm']")
-    private WebElement createStorePage;
-    @FindBy(css = "a[href='/store/deleteStoreForm']")
-    private WebElement deleteStorePage;
+    private WebElement createStoreButton;
 
     public MainPage(WebDriver driver) {
         super(driver);
     }
 
-    public void clickToBuy() {
-        buyProductPage.click();
+    public void clickToManage() {
+        manageButton.click();
     }
 
-    public void clickToSell() {
-        sellProductPage.click();
-    }
-
-    public void clickToGetAllProduct() {
-        getAllProductPage.click();
+    public void clickToProductsList() {
+        getProductsButton.click();
     }
 
     public void clickToCreateStore() {
-        createStorePage.click();
+        createStoreButton.click();
     }
 
-    public void clickToDeleteStore() {
-        deleteStorePage.click();
-    }
 }
