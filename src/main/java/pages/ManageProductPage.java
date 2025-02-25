@@ -18,6 +18,8 @@ public class ManageProductPage extends BasePage {
     @FindBy(css = "button[onclick=\"submitForm('SELL_PRODUCT')\"]")
     private WebElement sellButton;
 
+    private final String xpathTextResult = "//div[@id='manageProductResult']";
+
     public ManageProductPage(WebDriver driver) {
         super(driver);
     }
@@ -43,12 +45,22 @@ public class ManageProductPage extends BasePage {
     }
 
     public boolean checkResult(String operation, String product, String count, String store, String account) {
-        String xpath = "//div[@id='manageProductResult']//p";
-        return driver.findElement(By.xpath(xpath+"[1]")).getText().equals(operation) &&
-                driver.findElement(By.xpath(xpath+"[2]")).getText().equals(product) &&
-                driver.findElement(By.xpath(xpath+"[3]")).getText().equals(count) &&
-                driver.findElement(By.xpath(xpath+"[5]")).getText().equals(store) &&
-                driver.findElement(By.xpath(xpath+"[6]")).getText().equals(account);
+        return driver.findElement(By.xpath(xpathTextResult+"//p[1]")).getText().equals(operation) &&
+                driver.findElement(By.xpath(xpathTextResult+"//p[2]")).getText().equals(product) &&
+                driver.findElement(By.xpath(xpathTextResult+"//p[3]")).getText().equals(count) &&
+                driver.findElement(By.xpath(xpathTextResult+"//p[5]")).getText().equals(store) &&
+                driver.findElement(By.xpath(xpathTextResult+"//p[6]")).getText().equals(account);
+    }
+
+    public boolean checkResultWithError() {
+        String error = "Ошибка: ";
+        return driver.findElement(By.xpath(xpathTextResult)).getText().equals(error + "Продукт не найден") ||
+                driver.findElement(By.xpath(xpathTextResult)).getText().equals(error + "Магазин не найден") ||
+                driver.findElement(By.xpath(xpathTextResult)).getText().equals(error + "Количество не может быть равно или меньше нуля") ||
+                driver.findElement(By.xpath(xpathTextResult)).getText().equals(error + "Недостаточно средств на балансе для покупки") ||
+                driver.findElement(By.xpath(xpathTextResult)).getText().equals(error + "Пользователю не принадлежит магазин") ||
+                driver.findElement(By.xpath(xpathTextResult)).getText().contains("Превышена вместимость склада.") ||
+                driver.findElement(By.xpath(xpathTextResult)).getText().contains(error + "Превышен лимит количества продукта.");
     }
 
 }

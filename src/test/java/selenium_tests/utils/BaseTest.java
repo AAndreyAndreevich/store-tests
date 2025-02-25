@@ -1,4 +1,4 @@
-package utils;
+package selenium_tests.utils;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.AfterEach;
