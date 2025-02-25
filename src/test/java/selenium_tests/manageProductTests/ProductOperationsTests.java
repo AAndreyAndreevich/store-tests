@@ -20,9 +20,7 @@ public class ProductOperationsTests extends BaseTest {
         setSettingDriver();
         logInUser();
         mainPage.clickToManage();
-        managePage.enterStoreId("1");
-        managePage.enterProductId("1");
-        managePage.enterCount("1");
+        manageSetValue("1", "1", "1");
         managePage.buyClick();
         Assertions.assertTrue(
                 managePage.checkResult(
@@ -41,9 +39,7 @@ public class ProductOperationsTests extends BaseTest {
         setSettingDriver();
         logInUser();
         mainPage.clickToManage();
-        managePage.enterStoreId("1");
-        managePage.enterProductId("1");
-        managePage.enterCount("1");
+        manageSetValue("1", "1", "1");
         managePage.sellClick();
         Assertions.assertTrue(
                 managePage.checkResult(
@@ -63,7 +59,21 @@ public class ProductOperationsTests extends BaseTest {
         managePage = new ManageProductPage(driver);
     }
 
+    private void manageSetValue(String storeId, String productId, String count) {
+        managePage.enterStoreId(storeId);
+        managePage.enterProductId(productId);
+        managePage.enterCount(count);
+    }
+
     private void logInUser() {
         loginAndRegPage.loginIn("user", "user");
+    }
+
+    private void logInNoStoreUser() {
+        loginAndRegPage.loginIn("nostore", "nostore");
+    }
+
+    private void logInNoBalanceUser() {
+        loginAndRegPage.loginIn("nobalance", "nobalance");
     }
 }
