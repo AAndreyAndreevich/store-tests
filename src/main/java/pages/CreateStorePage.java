@@ -10,6 +10,8 @@ public class CreateStorePage extends BasePage {
     private WebElement storeNameField;
     @FindBy(css = "button[onclick]")
     private WebElement submit;
+    @FindBy(id = "createStoreResult")
+    private WebElement result;
 
     public CreateStorePage(WebDriver driver) {
         super(driver);
@@ -21,5 +23,10 @@ public class CreateStorePage extends BasePage {
 
     public void createStoreClick() {
         submit.click();
+    }
+
+    public boolean checkResultWithError(String name) {
+        return result.getText().equals("Ошибка: Магазин с названием '" + name + "' существует") ||
+                result.getText().equals("Ошибка: Название магазина не может быть пустым");
     }
 }
