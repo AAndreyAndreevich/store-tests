@@ -3,6 +3,7 @@ package selenium_tests.manageProductTests;
 import io.qameta.allure.Description;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import pages.GetAllProductsPage;
 import pages.LoginAndRegistrationPage;
 import pages.MainPage;
 import pages.ManageProductPage;
@@ -13,6 +14,7 @@ public class ProductOperationTestsWithError extends BaseTest {
     private MainPage mainPage;
     private LoginAndRegistrationPage loginAndRegPage;
     private ManageProductPage managePage;
+    private GetAllProductsPage allProductsPage;
 
     private final String URL = "http://localhost:8080/";
 
@@ -93,11 +95,68 @@ public class ProductOperationTestsWithError extends BaseTest {
         Assertions.assertTrue(managePage.checkResultWithError());
     }
 
+    @Test
+    @Description("Попытка продажи с несуществующим ID продукта")
+    public void sellProductWithNonexistentProductIdTest() {
+        setSettingDriver();
+        logInUser();
+        mainPage.clickToManage();
+        manageSetValue("1", "6", "1");
+        managePage.sellClick();
+        Assertions.assertTrue(managePage.checkResultWithError());
+    }
+
+    @Test
+    @Description("Попытка продажи с несуществующим ID магазина")
+    public void sellProductWithNonexistentStoreIdTest() {
+        setSettingDriver();
+        logInUser();
+        mainPage.clickToManage();
+        manageSetValue("69", "1", "1");
+        managePage.sellClick();
+        Assertions.assertTrue(managePage.checkResultWithError());
+    }
+
+    @Test
+    @Description("Попытка продажи с нулевым количеством")
+    public void sellProductWithZeroQuantityTest() {
+        setSettingDriver();
+        logInUser();
+        mainPage.clickToManage();
+        manageSetValue("1", "1", "0");
+        managePage.sellClick();
+        Assertions.assertTrue(managePage.checkResultWithError());
+    }
+
+    @Test
+    @Description("Попытка продажи из чужого магазина")
+    public void sellProductNotOwnStoreTest() {
+        setSettingDriver();
+        logInUser();
+        mainPage.clickToManage();
+        manageSetValue("5", "1", "1");
+        managePage.sellClick();
+        Assertions.assertTrue(managePage.checkResultWithError());
+    }
+
+    @Test
+    @Description("Попытка запросить список продуктов из пустого магазина")
+    public void getProductListFromEmptyStoreTest() {
+        setSettingDriver();
+        logInUser();
+        mainPage.clickToProductsList();
+        allProductsPage.storeSetValue("Бедняга");
+        allProductsPage.clickSubmit();
+        Assertions.assertEquals("Ошибка: Магазин пуст или его не существует",
+                allProductsPage.getAllProductsResult());
+    }
+
     private void setSettingDriver() {
         driver.get(URL);
         mainPage = new MainPage(driver);
         loginAndRegPage = new LoginAndRegistrationPage(driver);
         managePage = new ManageProductPage(driver);
+        allProductsPage = new GetAllProductsPage(driver);
     }
 
     private void manageSetValue(String storeId, String productId, String count) {
