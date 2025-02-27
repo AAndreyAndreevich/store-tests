@@ -14,7 +14,6 @@ public class ManageProductPageTest extends BaseTest {
     private MainPage mainPage;
     private LoginAndRegistrationPage loginAndRegPage;
     private ManageProductPage managePage;
-    private GetAllProductsPage allProductsPage;
 
     private final String URL = "http://localhost:8080/";
 
@@ -22,7 +21,7 @@ public class ManageProductPageTest extends BaseTest {
     @Description("Покупка продукта")
     public void buyProductTest_Success() {
         setSettingDriver();
-        logInUser();
+        loginAndRegPage.logInUser();
         mainPage.clickToManage();
         manageSetValue("1", "1", "1");
         managePage.buyClick();
@@ -41,7 +40,7 @@ public class ManageProductPageTest extends BaseTest {
     @Description("Продажа продукта")
     public void sellProductTest_Success() {
         setSettingDriver();
-        logInUser();
+        loginAndRegPage.logInUser();
         mainPage.clickToManage();
         manageSetValue("1", "1", "1");
         managePage.sellClick();
@@ -60,7 +59,7 @@ public class ManageProductPageTest extends BaseTest {
     @Description("Попытка покупки с несуществующим ID продукта")
     public void buyProductWithNonexistentProductIdTest_Fail() {
         setSettingDriver();
-        logInUser();
+        loginAndRegPage.logInUser();
         mainPage.clickToManage();
         manageSetValue("1", "6", "1");
         managePage.buyClick();
@@ -71,7 +70,7 @@ public class ManageProductPageTest extends BaseTest {
     @Description("Попытка покупки с несуществующим ID магазина")
     public void buyProductWithNonexistentStoreIdTest_Fail() {
         setSettingDriver();
-        logInUser();
+        loginAndRegPage.logInUser();
         mainPage.clickToManage();
         manageSetValue("69", "1", "1");
         managePage.buyClick();
@@ -82,7 +81,7 @@ public class ManageProductPageTest extends BaseTest {
     @Description("Попытка покупки с превышением вместимости склада")
     public void buyProductWithExceedingLimitTest_Fail() {
         setSettingDriver();
-        logInUser();
+        loginAndRegPage.logInUser();
         mainPage.clickToManage();
         manageSetValue("1", "1", "70");
         managePage.buyClick();
@@ -93,7 +92,7 @@ public class ManageProductPageTest extends BaseTest {
     @Description("Попытка покупки с нулевым количеством")
     public void buyProductWithZeroQuantityTest_Fail() {
         setSettingDriver();
-        logInUser();
+        loginAndRegPage.logInUser();
         mainPage.clickToManage();
         manageSetValue("1", "1", "0");
         managePage.buyClick();
@@ -104,7 +103,7 @@ public class ManageProductPageTest extends BaseTest {
     @Description("Попытка покупки с нулевым балансом")
     public void buyProductWithZeroBalanceTest_Fail() {
         setSettingDriver();
-        logInNoBalanceUser();
+        loginAndRegPage.logInNoBalanceUser();
         mainPage.clickToManage();
         manageSetValue("5", "1", "1");
         managePage.buyClick();
@@ -115,7 +114,7 @@ public class ManageProductPageTest extends BaseTest {
     @Description("Попытка покупки в чужой магазин")
     public void buyProductNotOwnStoreTest_Fail() {
         setSettingDriver();
-        logInUser();
+        loginAndRegPage.logInUser();
         mainPage.clickToManage();
         manageSetValue("5", "1", "1");
         managePage.buyClick();
@@ -126,7 +125,7 @@ public class ManageProductPageTest extends BaseTest {
     @Description("Попытка продажи сверх лимит")
     public void sellProductExceedingLimitTest_Fail() {
         setSettingDriver();
-        logInUser();
+        loginAndRegPage.logInUser();
         mainPage.clickToManage();
         manageSetValue("1", "1", "71");
         managePage.sellClick();
@@ -137,7 +136,7 @@ public class ManageProductPageTest extends BaseTest {
     @Description("Попытка продажи с несуществующим ID продукта")
     public void sellProductWithNonexistentProductIdTest_Fail() {
         setSettingDriver();
-        logInUser();
+        loginAndRegPage.logInUser();
         mainPage.clickToManage();
         manageSetValue("1", "6", "1");
         managePage.sellClick();
@@ -148,7 +147,7 @@ public class ManageProductPageTest extends BaseTest {
     @Description("Попытка продажи с несуществующим ID магазина")
     public void sellProductWithNonexistentStoreIdTest_Fail() {
         setSettingDriver();
-        logInUser();
+        loginAndRegPage.logInUser();
         mainPage.clickToManage();
         manageSetValue("69", "1", "1");
         managePage.sellClick();
@@ -159,7 +158,7 @@ public class ManageProductPageTest extends BaseTest {
     @Description("Попытка продажи с нулевым количеством")
     public void sellProductWithZeroQuantityTest_Fail() {
         setSettingDriver();
-        logInUser();
+        loginAndRegPage.logInUser();
         mainPage.clickToManage();
         manageSetValue("1", "1", "0");
         managePage.sellClick();
@@ -170,23 +169,11 @@ public class ManageProductPageTest extends BaseTest {
     @Description("Попытка продажи из чужого магазина")
     public void sellProductNotOwnStoreTest_Fail() {
         setSettingDriver();
-        logInUser();
+        loginAndRegPage.logInUser();
         mainPage.clickToManage();
         manageSetValue("5", "1", "1");
         managePage.sellClick();
         Assertions.assertTrue(managePage.checkResultWithError());
-    }
-
-    @Test
-    @Description("Попытка запросить список продуктов из пустого магазина")
-    public void getProductListFromEmptyStoreTest_Fail() {
-        setSettingDriver();
-        logInUser();
-        mainPage.clickToProductsList();
-        allProductsPage.storeSetValue("Бедняга");
-        allProductsPage.clickSubmit();
-        Assertions.assertEquals("Ошибка: Магазин пуст или его не существует",
-                allProductsPage.getAllProductsResult());
     }
 
     private void setSettingDriver() {
@@ -194,24 +181,11 @@ public class ManageProductPageTest extends BaseTest {
         mainPage = new MainPage(driver);
         loginAndRegPage = new LoginAndRegistrationPage(driver);
         managePage = new ManageProductPage(driver);
-        allProductsPage = new GetAllProductsPage(driver);
     }
 
     private void manageSetValue(String storeId, String productId, String count) {
         managePage.enterStoreId(storeId);
         managePage.enterProductId(productId);
         managePage.enterCount(count);
-    }
-
-    private void logInUser() {
-        loginAndRegPage.loginIn("user", "user");
-    }
-
-    private void logInNoStoreUser() {
-        loginAndRegPage.loginIn("nostore", "nostore");
-    }
-
-    private void logInNoBalanceUser() {
-        loginAndRegPage.loginIn("nobalance", "nobalance");
     }
 }

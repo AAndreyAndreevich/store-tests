@@ -44,4 +44,16 @@ public class LoginAndRegistrationPage {
         enterPassword(password);
         clickSubmit();
     }
+
+    public void logInUser() {
+        loginIn("user", "user");
+    }
+
+    public void logInNoStoreUser() {
+        loginIn("nostore", "nostore");
+    }
+
+    public void logInNoBalanceUser() {
+        loginIn("nobalance", "nobalance");
+    }
 }

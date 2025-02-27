@@ -9,6 +9,7 @@ import pages.MainPage;
 import selenium_tests.utils.BaseTest;
 
 public class CreateStorePageTest extends BaseTest {
+
     private CreateStorePage createStorePage;
     private LoginAndRegistrationPage loginAndRegPage;
     private MainPage mainPage;
@@ -17,9 +18,9 @@ public class CreateStorePageTest extends BaseTest {
 
     @Test
     @Description("Попытка создать магазин с пустым названием")
-    public void createStoreWithEmptyNameTest() {
+    public void createStoreWithEmptyNameTest_Fail() {
         setSettingDriver();
-        logInUser();
+        loginAndRegPage.logInUser();
         String name = "";
         mainPage.clickToCreateStore();
         createStorePage.enterStoreName(name);
@@ -28,9 +29,9 @@ public class CreateStorePageTest extends BaseTest {
 
     @Test
     @Description("Попытка создать магазин с занятым названием")
-    public void createStoreWithBusyNameTest() {
+    public void createStoreWithBusyNameTest_Fail() {
         setSettingDriver();
-        logInUser();
+        loginAndRegPage.logInUser();
         String name = "Пяточка";
         mainPage.clickToCreateStore();
         createStorePage.enterStoreName(name);
@@ -42,17 +43,5 @@ public class CreateStorePageTest extends BaseTest {
         createStorePage = new CreateStorePage(driver);
         loginAndRegPage = new LoginAndRegistrationPage(driver);
         mainPage = new MainPage(driver);
-    }
-
-    private void logInUser() {
-        loginAndRegPage.loginIn("user", "user");
-    }
-
-    private void logInNoStoreUser() {
-        loginAndRegPage.loginIn("nostore", "nostore");
-    }
-
-    private void logInNoBalanceUser() {
-        loginAndRegPage.loginIn("nobalance", "nobalance");
     }
 }
