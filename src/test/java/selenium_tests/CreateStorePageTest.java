@@ -1,13 +1,14 @@
-package selenium_tests.manageStoreTests;
+package selenium_tests;
 
 import io.qameta.allure.Description;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import pages.*;
+import pages.CreateStorePage;
+import pages.LoginAndRegistrationPage;
+import pages.MainPage;
 import selenium_tests.utils.BaseTest;
 
-public class CreateStorePageWithError extends BaseTest {
-
+public class CreateStorePageTest extends BaseTest {
     private CreateStorePage createStorePage;
     private LoginAndRegistrationPage loginAndRegPage;
     private MainPage mainPage;
@@ -54,5 +55,4 @@ public class CreateStorePageWithError extends BaseTest {
     private void logInNoBalanceUser() {
         loginAndRegPage.loginIn("nobalance", "nobalance");
     }
-
 }

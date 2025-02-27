@@ -1,4 +1,4 @@
-package selenium_tests.manageProductTests;
+package selenium_tests;
 
 import io.qameta.allure.Description;
 import org.junit.jupiter.api.Assertions;
@@ -9,7 +9,7 @@ import pages.MainPage;
 import pages.ManageProductPage;
 import selenium_tests.utils.BaseTest;
 
-public class ProductOperationTestsWithError extends BaseTest {
+public class ManageProductPageTest extends BaseTest {
 
     private MainPage mainPage;
     private LoginAndRegistrationPage loginAndRegPage;
@@ -19,8 +19,46 @@ public class ProductOperationTestsWithError extends BaseTest {
     private final String URL = "http://localhost:8080/";
 
     @Test
+    @Description("Покупка продукта")
+    public void buyProductTest_Success() {
+        setSettingDriver();
+        logInUser();
+        mainPage.clickToManage();
+        manageSetValue("1", "1", "1");
+        managePage.buyClick();
+        Assertions.assertTrue(
+                managePage.checkResult(
+                        "Тип операции: Покупка продукта",
+                        "Название продукта: Хлеб",
+                        "Количество: 1",
+                        "Магазин: Пяточка",
+                        "Пользователь: user"
+                )
+        );
+    }
+
+    @Test
+    @Description("Продажа продукта")
+    public void sellProductTest_Success() {
+        setSettingDriver();
+        logInUser();
+        mainPage.clickToManage();
+        manageSetValue("1", "1", "1");
+        managePage.sellClick();
+        Assertions.assertTrue(
+                managePage.checkResult(
+                        "Тип операции: Продажа продукта",
+                        "Название продукта: Хлеб",
+                        "Количество: 1",
+                        "Магазин: Пяточка",
+                        "Пользователь: user"
+                )
+        );
+    }
+
+    @Test
     @Description("Попытка покупки с несуществующим ID продукта")
-    public void buyProductWithNonexistentProductIdTest() {
+    public void buyProductWithNonexistentProductIdTest_Fail() {
         setSettingDriver();
         logInUser();
         mainPage.clickToManage();
@@ -31,7 +69,7 @@ public class ProductOperationTestsWithError extends BaseTest {
 
     @Test
     @Description("Попытка покупки с несуществующим ID магазина")
-    public void buyProductWithNonexistentStoreIdTest() {
+    public void buyProductWithNonexistentStoreIdTest_Fail() {
         setSettingDriver();
         logInUser();
         mainPage.clickToManage();
@@ -42,7 +80,7 @@ public class ProductOperationTestsWithError extends BaseTest {
 
     @Test
     @Description("Попытка покупки с превышением вместимости склада")
-    public void buyProductWithExceedingLimitTest() {
+    public void buyProductWithExceedingLimitTest_Fail() {
         setSettingDriver();
         logInUser();
         mainPage.clickToManage();
@@ -53,7 +91,7 @@ public class ProductOperationTestsWithError extends BaseTest {
 
     @Test
     @Description("Попытка покупки с нулевым количеством")
-    public void buyProductWithZeroQuantityTest() {
+    public void buyProductWithZeroQuantityTest_Fail() {
         setSettingDriver();
         logInUser();
         mainPage.clickToManage();
@@ -64,7 +102,7 @@ public class ProductOperationTestsWithError extends BaseTest {
 
     @Test
     @Description("Попытка покупки с нулевым балансом")
-    public void buyProductWithZeroBalanceTest() {
+    public void buyProductWithZeroBalanceTest_Fail() {
         setSettingDriver();
         logInNoBalanceUser();
         mainPage.clickToManage();
@@ -75,7 +113,7 @@ public class ProductOperationTestsWithError extends BaseTest {
 
     @Test
     @Description("Попытка покупки в чужой магазин")
-    public void buyProductNotOwnStoreTest() {
+    public void buyProductNotOwnStoreTest_Fail() {
         setSettingDriver();
         logInUser();
         mainPage.clickToManage();
@@ -86,7 +124,7 @@ public class ProductOperationTestsWithError extends BaseTest {
 
     @Test
     @Description("Попытка продажи сверх лимит")
-    public void sellProductExceedingLimitTest() {
+    public void sellProductExceedingLimitTest_Fail() {
         setSettingDriver();
         logInUser();
         mainPage.clickToManage();
@@ -97,7 +135,7 @@ public class ProductOperationTestsWithError extends BaseTest {
 
     @Test
     @Description("Попытка продажи с несуществующим ID продукта")
-    public void sellProductWithNonexistentProductIdTest() {
+    public void sellProductWithNonexistentProductIdTest_Fail() {
         setSettingDriver();
         logInUser();
         mainPage.clickToManage();
@@ -108,7 +146,7 @@ public class ProductOperationTestsWithError extends BaseTest {
 
     @Test
     @Description("Попытка продажи с несуществующим ID магазина")
-    public void sellProductWithNonexistentStoreIdTest() {
+    public void sellProductWithNonexistentStoreIdTest_Fail() {
         setSettingDriver();
         logInUser();
         mainPage.clickToManage();
@@ -119,7 +157,7 @@ public class ProductOperationTestsWithError extends BaseTest {
 
     @Test
     @Description("Попытка продажи с нулевым количеством")
-    public void sellProductWithZeroQuantityTest() {
+    public void sellProductWithZeroQuantityTest_Fail() {
         setSettingDriver();
         logInUser();
         mainPage.clickToManage();
@@ -130,7 +168,7 @@ public class ProductOperationTestsWithError extends BaseTest {
 
     @Test
     @Description("Попытка продажи из чужого магазина")
-    public void sellProductNotOwnStoreTest() {
+    public void sellProductNotOwnStoreTest_Fail() {
         setSettingDriver();
         logInUser();
         mainPage.clickToManage();
@@ -141,7 +179,7 @@ public class ProductOperationTestsWithError extends BaseTest {
 
     @Test
     @Description("Попытка запросить список продуктов из пустого магазина")
-    public void getProductListFromEmptyStoreTest() {
+    public void getProductListFromEmptyStoreTest_Fail() {
         setSettingDriver();
         logInUser();
         mainPage.clickToProductsList();
