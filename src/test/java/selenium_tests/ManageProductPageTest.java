@@ -19,7 +19,7 @@ public class ManageProductPageTest extends BaseTest {
 
     @Test
     @Description("Покупка продукта")
-    public void buyProductTest_Success() {
+    public void buyProductTest() {
         setSettingDriver();
         loginAndRegPage.logInUser();
         mainPage.clickToManage();
@@ -38,7 +38,7 @@ public class ManageProductPageTest extends BaseTest {
 
     @Test
     @Description("Продажа продукта")
-    public void sellProductTest_Success() {
+    public void sellProductTest() {
         setSettingDriver();
         loginAndRegPage.logInUser();
         mainPage.clickToManage();
@@ -57,7 +57,7 @@ public class ManageProductPageTest extends BaseTest {
 
     @Test
     @Description("Попытка покупки с несуществующим ID продукта")
-    public void buyProductWithNonexistentProductIdTest_Fail() {
+    public void buyProductWithNonexistentProductIdTest() {
         setSettingDriver();
         loginAndRegPage.logInUser();
         mainPage.clickToManage();
@@ -68,7 +68,7 @@ public class ManageProductPageTest extends BaseTest {
 
     @Test
     @Description("Попытка покупки с несуществующим ID магазина")
-    public void buyProductWithNonexistentStoreIdTest_Fail() {
+    public void buyProductWithNonexistentStoreIdTest() {
         setSettingDriver();
         loginAndRegPage.logInUser();
         mainPage.clickToManage();
@@ -79,7 +79,7 @@ public class ManageProductPageTest extends BaseTest {
 
     @Test
     @Description("Попытка покупки с превышением вместимости склада")
-    public void buyProductWithExceedingLimitTest_Fail() {
+    public void buyProductWithExceedingLimitTest() {
         setSettingDriver();
         loginAndRegPage.logInUser();
         mainPage.clickToManage();
@@ -90,7 +90,7 @@ public class ManageProductPageTest extends BaseTest {
 
     @Test
     @Description("Попытка покупки с нулевым количеством")
-    public void buyProductWithZeroQuantityTest_Fail() {
+    public void buyProductWithZeroQuantityTest() {
         setSettingDriver();
         loginAndRegPage.logInUser();
         mainPage.clickToManage();
@@ -101,7 +101,7 @@ public class ManageProductPageTest extends BaseTest {
 
     @Test
     @Description("Попытка покупки с нулевым балансом")
-    public void buyProductWithZeroBalanceTest_Fail() {
+    public void buyProductWithZeroBalanceTest() {
         setSettingDriver();
         loginAndRegPage.logInNoBalanceUser();
         mainPage.clickToManage();
@@ -112,7 +112,7 @@ public class ManageProductPageTest extends BaseTest {
 
     @Test
     @Description("Попытка покупки в чужой магазин")
-    public void buyProductNotOwnStoreTest_Fail() {
+    public void buyProductNotOwnStoreTest() {
         setSettingDriver();
         loginAndRegPage.logInUser();
         mainPage.clickToManage();
@@ -123,7 +123,7 @@ public class ManageProductPageTest extends BaseTest {
 
     @Test
     @Description("Попытка продажи сверх лимит")
-    public void sellProductExceedingLimitTest_Fail() {
+    public void sellProductExceedingLimitTest() {
         setSettingDriver();
         loginAndRegPage.logInUser();
         mainPage.clickToManage();
@@ -134,7 +134,7 @@ public class ManageProductPageTest extends BaseTest {
 
     @Test
     @Description("Попытка продажи с несуществующим ID продукта")
-    public void sellProductWithNonexistentProductIdTest_Fail() {
+    public void sellProductWithNonexistentProductIdTest() {
         setSettingDriver();
         loginAndRegPage.logInUser();
         mainPage.clickToManage();
@@ -145,7 +145,7 @@ public class ManageProductPageTest extends BaseTest {
 
     @Test
     @Description("Попытка продажи с несуществующим ID магазина")
-    public void sellProductWithNonexistentStoreIdTest_Fail() {
+    public void sellProductWithNonexistentStoreIdTest() {
         setSettingDriver();
         loginAndRegPage.logInUser();
         mainPage.clickToManage();
@@ -156,7 +156,7 @@ public class ManageProductPageTest extends BaseTest {
 
     @Test
     @Description("Попытка продажи с нулевым количеством")
-    public void sellProductWithZeroQuantityTest_Fail() {
+    public void sellProductWithZeroQuantityTest() {
         setSettingDriver();
         loginAndRegPage.logInUser();
         mainPage.clickToManage();
@@ -167,7 +167,7 @@ public class ManageProductPageTest extends BaseTest {
 
     @Test
     @Description("Попытка продажи из чужого магазина")
-    public void sellProductNotOwnStoreTest_Fail() {
+    public void sellProductNotOwnStoreTest() {
         setSettingDriver();
         loginAndRegPage.logInUser();
         mainPage.clickToManage();

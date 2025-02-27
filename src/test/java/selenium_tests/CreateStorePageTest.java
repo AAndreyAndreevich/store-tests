@@ -18,7 +18,7 @@ public class CreateStorePageTest extends BaseTest {
 
     @Test
     @Description("Попытка создать магазин с пустым названием")
-    public void createStoreWithEmptyNameTest_Fail() {
+    public void createStoreWithEmptyNameTest() {
         setSettingDriver();
         loginAndRegPage.logInUser();
         String name = "";
@@ -29,7 +29,7 @@ public class CreateStorePageTest extends BaseTest {
 
     @Test
     @Description("Попытка создать магазин с занятым названием")
-    public void createStoreWithBusyNameTest_Fail() {
+    public void createStoreWithBusyNameTest() {
         setSettingDriver();
         loginAndRegPage.logInUser();
         String name = "Пяточка";

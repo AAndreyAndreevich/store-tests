@@ -18,7 +18,7 @@ public class GetAllProductsPageTest extends BaseTest {
 
     @Test
     @Description("Попытка запросить список продуктов из пустого магазина")
-    public void getProductListFromEmptyStoreTest_Fail() {
+    public void getProductListFromEmptyStoreTest() {
         setSettingDriver();
         loginAndRegPage.logInUser();
         mainPage.clickToProductsList();
