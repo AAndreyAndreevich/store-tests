@@ -1,12 +1,13 @@
 package selenium_tests;
 
 import io.qameta.allure.Description;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import pages.GetAllProductsPage;
 import pages.LoginAndRegistrationPage;
 import pages.MainPage;
 import selenium_tests.utils.BaseTest;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class GetAllProductsPageTest extends BaseTest {
 
@@ -24,7 +25,7 @@ public class GetAllProductsPageTest extends BaseTest {
         mainPage.clickToProductsList();
         allProductsPage.storeSetValue("Бедняга");
         allProductsPage.clickSubmit();
-        Assertions.assertEquals("Ошибка: Магазин пуст или его не существует",
+        assertEquals("Ошибка: Магазин пуст или его не существует",
                 allProductsPage.getAllProductsResult());
     }
 

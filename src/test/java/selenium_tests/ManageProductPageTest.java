@@ -1,13 +1,13 @@
 package selenium_tests;
 
 import io.qameta.allure.Description;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import pages.GetAllProductsPage;
 import pages.LoginAndRegistrationPage;
 import pages.MainPage;
 import pages.ManageProductPage;
 import selenium_tests.utils.BaseTest;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ManageProductPageTest extends BaseTest {
 
@@ -25,7 +25,7 @@ public class ManageProductPageTest extends BaseTest {
         mainPage.clickToManage();
         manageSetValue("1", "1", "1");
         managePage.buyClick();
-        Assertions.assertTrue(
+        assertTrue(
                 managePage.checkResult(
                         "Тип операции: Покупка продукта",
                         "Название продукта: Хлеб",
@@ -44,7 +44,7 @@ public class ManageProductPageTest extends BaseTest {
         mainPage.clickToManage();
         manageSetValue("1", "1", "1");
         managePage.sellClick();
-        Assertions.assertTrue(
+        assertTrue(
                 managePage.checkResult(
                         "Тип операции: Продажа продукта",
                         "Название продукта: Хлеб",
@@ -63,7 +63,7 @@ public class ManageProductPageTest extends BaseTest {
         mainPage.clickToManage();
         manageSetValue("1", "6", "1");
         managePage.buyClick();
-        Assertions.assertTrue(managePage.checkResultWithError());
+        assertTrue(managePage.checkResultWithError());
     }
 
     @Test
@@ -74,7 +74,7 @@ public class ManageProductPageTest extends BaseTest {
         mainPage.clickToManage();
         manageSetValue("69", "1", "1");
         managePage.buyClick();
-        Assertions.assertTrue(managePage.checkResultWithError());
+        assertTrue(managePage.checkResultWithError());
     }
 
     @Test
@@ -85,7 +85,7 @@ public class ManageProductPageTest extends BaseTest {
         mainPage.clickToManage();
         manageSetValue("1", "1", "70");
         managePage.buyClick();
-        Assertions.assertTrue(managePage.checkResultWithError());
+        assertTrue(managePage.checkResultWithError());
     }
 
     @Test
@@ -96,7 +96,7 @@ public class ManageProductPageTest extends BaseTest {
         mainPage.clickToManage();
         manageSetValue("1", "1", "0");
         managePage.buyClick();
-        Assertions.assertTrue(managePage.checkResultWithError());
+        assertTrue(managePage.checkResultWithError());
     }
 
     @Test
@@ -107,7 +107,7 @@ public class ManageProductPageTest extends BaseTest {
         mainPage.clickToManage();
         manageSetValue("5", "1", "1");
         managePage.buyClick();
-        Assertions.assertTrue(managePage.checkResultWithError());
+        assertTrue(managePage.checkResultWithError());
     }
 
     @Test
@@ -118,7 +118,7 @@ public class ManageProductPageTest extends BaseTest {
         mainPage.clickToManage();
         manageSetValue("5", "1", "1");
         managePage.buyClick();
-        Assertions.assertTrue(managePage.checkResultWithError());
+        assertTrue(managePage.checkResultWithError());
     }
 
     @Test
@@ -129,7 +129,7 @@ public class ManageProductPageTest extends BaseTest {
         mainPage.clickToManage();
         manageSetValue("1", "1", "71");
         managePage.sellClick();
-        Assertions.assertTrue(managePage.checkResultWithError());
+        assertTrue(managePage.checkResultWithError());
     }
 
     @Test
@@ -140,7 +140,7 @@ public class ManageProductPageTest extends BaseTest {
         mainPage.clickToManage();
         manageSetValue("1", "6", "1");
         managePage.sellClick();
-        Assertions.assertTrue(managePage.checkResultWithError());
+        assertTrue(managePage.checkResultWithError());
     }
 
     @Test
@@ -151,7 +151,7 @@ public class ManageProductPageTest extends BaseTest {
         mainPage.clickToManage();
         manageSetValue("69", "1", "1");
         managePage.sellClick();
-        Assertions.assertTrue(managePage.checkResultWithError());
+        assertTrue(managePage.checkResultWithError());
     }
 
     @Test
@@ -162,7 +162,7 @@ public class ManageProductPageTest extends BaseTest {
         mainPage.clickToManage();
         manageSetValue("1", "1", "0");
         managePage.sellClick();
-        Assertions.assertTrue(managePage.checkResultWithError());
+        assertTrue(managePage.checkResultWithError());
     }
 
     @Test
@@ -173,7 +173,7 @@ public class ManageProductPageTest extends BaseTest {
         mainPage.clickToManage();
         manageSetValue("5", "1", "1");
         managePage.sellClick();
-        Assertions.assertTrue(managePage.checkResultWithError());
+        assertTrue(managePage.checkResultWithError());
     }
 
     private void setSettingDriver() {

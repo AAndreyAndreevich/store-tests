@@ -8,6 +8,8 @@ import pages.LoginAndRegistrationPage;
 import pages.MainPage;
 import selenium_tests.utils.BaseTest;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 public class CreateStorePageTest extends BaseTest {
 
     private CreateStorePage createStorePage;
@@ -24,7 +26,7 @@ public class CreateStorePageTest extends BaseTest {
         String name = "";
         mainPage.clickToCreateStore();
         createStorePage.enterStoreName(name);
-        Assertions.assertTrue(createStorePage.checkResultWithError(name));
+        assertTrue(createStorePage.checkResultWithError(name));
     }
 
     @Test
@@ -35,7 +37,7 @@ public class CreateStorePageTest extends BaseTest {
         String name = "Пяточка";
         mainPage.clickToCreateStore();
         createStorePage.enterStoreName(name);
-        Assertions.assertTrue(createStorePage.checkResultWithError(name));
+        assertTrue(createStorePage.checkResultWithError(name));
     }
 
     private void setSettingDriver() {
