@@ -17,6 +17,10 @@ public class LoginAndRegistrationPage {
     private WebElement registrationButton;
     @FindBy(css = "button[type='submit']")
     private WebElement submitButton;
+    @FindBy(id = "error-message")
+    private WebElement errorText;
+    @FindBy(css = "a[href='/login']")
+    private WebElement loginButton;
 
     public LoginAndRegistrationPage(WebDriver driver) {
         this.driver = driver;
@@ -55,5 +59,11 @@ public class LoginAndRegistrationPage {
 
     public void logInNoBalanceUser() {
         loginIn("nobalance", "nobalance");
+    }
+
+    public boolean checkResultWithError() {
+        return errorText.getText().contains("Пользователь с таким именем уже существует:") ||
+                errorText.getText().contains("Имя пользователя должно быть от ") ||
+                errorText.getText().contains("Пароль должен быть от ");
     }
 }

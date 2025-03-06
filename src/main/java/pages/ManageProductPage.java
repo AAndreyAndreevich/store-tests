@@ -17,6 +17,8 @@ public class ManageProductPage extends BasePage {
     private WebElement buyButton;
     @FindBy(css = "button[onclick=\"submitForm('SELL_PRODUCT')\"]")
     private WebElement sellButton;
+    @FindBy(xpath = "//div[@id='manageProductResult']")
+    private WebElement textResult;
 
     private final String xpathTextResult = "//div[@id='manageProductResult']";
 
@@ -54,13 +56,13 @@ public class ManageProductPage extends BasePage {
 
     public boolean checkResultWithError() {
         String error = "Ошибка: ";
-        return driver.findElement(By.xpath(xpathTextResult)).getText().equals(error + "Продукт не найден") ||
-                driver.findElement(By.xpath(xpathTextResult)).getText().equals(error + "Магазин не найден") ||
-                driver.findElement(By.xpath(xpathTextResult)).getText().equals(error + "Количество не может быть равно или меньше нуля") ||
-                driver.findElement(By.xpath(xpathTextResult)).getText().equals(error + "Недостаточно средств на балансе для покупки") ||
-                driver.findElement(By.xpath(xpathTextResult)).getText().equals(error + "Пользователю не принадлежит магазин") ||
-                driver.findElement(By.xpath(xpathTextResult)).getText().contains("Превышена вместимость склада.") ||
-                driver.findElement(By.xpath(xpathTextResult)).getText().contains(error + "Превышен лимит количества продукта.");
+        return textResult.getText().equals(error + "Продукт не найден") ||
+                textResult.getText().equals(error + "Магазин не найден") ||
+                textResult.getText().equals(error + "Количество не может быть равно или меньше нуля") ||
+                textResult.getText().equals(error + "Недостаточно средств на балансе для покупки") ||
+                textResult.getText().equals(error + "Пользователю не принадлежит магазин") ||
+                textResult.getText().contains("Превышена вместимость склада.") ||
+                textResult.getText().contains(error + "Превышен лимит количества продукта.");
     }
 
 }
