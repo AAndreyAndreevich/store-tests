@@ -3,7 +3,7 @@
 Тестовые сценарии с использованием Selenium+JUnit для моего pet-проекта.
 
 ## Ссылки
-- GitHub-проект: https://github.com/AAndreyAndreevich/store.git
+- Проект для которого написаны тесты: https://github.com/AAndreyAndreevich/store.git
 
 ## Контакты
 - Telegram: https://t.me/andrej_andreevich
