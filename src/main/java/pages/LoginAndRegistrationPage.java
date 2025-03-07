@@ -43,26 +43,26 @@ public class LoginAndRegistrationPage {
         registrationButton.click();
     }
 
-    public void loginIn(String username, String password) {
+    public void loginValue(String username, String password) {
         enterUsername(username);
         enterPassword(password);
         clickSubmit();
     }
 
     public void logInUser() {
-        loginIn("user", "user");
+        loginValue("user", "user");
     }
 
     public void logInNoStoreUser() {
-        loginIn("nostore", "nostore");
+        loginValue("nostore", "nostore");
     }
 
     public void logInNoBalanceUser() {
-        loginIn("nobalance", "nobalance");
+        loginValue("nobalance", "nobalance");
     }
 
     public boolean checkResultWithError() {
-        return errorText.getText().contains("Пользователь с таким именем уже существует:") ||
+        return errorText.getText().contains("Пользователь с таким именем уже существует: ") ||
                 errorText.getText().contains("Имя пользователя должно быть от ") ||
                 errorText.getText().contains("Пароль должен быть от ");
     }
