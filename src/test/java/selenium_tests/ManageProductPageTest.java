@@ -32,7 +32,9 @@ public class ManageProductPageTest extends BaseTest {
                         "Количество: 1",
                         "Магазин: Пяточка",
                         "Пользователь: user"
-                )
+                ),
+                "Проверяет соответствие результатов покупки," +
+                        "Должны быть 'Покупка продукта', 'Хлеб', '1' , 'Пяточка', 'user'"
         );
     }
 
@@ -51,7 +53,9 @@ public class ManageProductPageTest extends BaseTest {
                         "Количество: 1",
                         "Магазин: Пяточка",
                         "Пользователь: user"
-                )
+                ),
+                "Проверяет соответствие результатов покупки," +
+                        "Должны быть 'Продажа продукта', 'Хлеб', '1' , 'Пяточка', 'user'"
         );
     }
 
@@ -63,7 +67,8 @@ public class ManageProductPageTest extends BaseTest {
         mainPage.clickToManage();
         manageSetValue("1", "6", "1");
         managePage.buyClick();
-        assertTrue(managePage.checkResultWithError());
+        assertTrue(managePage.checkResultWithError(),
+                "Должно быть сообщение-ошибка о покупке продукта с несуществующим ID");
     }
 
     @Test
@@ -74,7 +79,8 @@ public class ManageProductPageTest extends BaseTest {
         mainPage.clickToManage();
         manageSetValue("69", "1", "1");
         managePage.buyClick();
-        assertTrue(managePage.checkResultWithError());
+        assertTrue(managePage.checkResultWithError(),
+                "Должно быть сообщение-ошибка о покупке в магазин несуществующим ID");
     }
 
     @Test
@@ -85,7 +91,8 @@ public class ManageProductPageTest extends BaseTest {
         mainPage.clickToManage();
         manageSetValue("1", "1", "70");
         managePage.buyClick();
-        assertTrue(managePage.checkResultWithError());
+        assertTrue(managePage.checkResultWithError(),
+                "Должно быть сообщение-ошибка о превышении вместимости склада");
     }
 
     @Test
@@ -96,7 +103,8 @@ public class ManageProductPageTest extends BaseTest {
         mainPage.clickToManage();
         manageSetValue("1", "1", "0");
         managePage.buyClick();
-        assertTrue(managePage.checkResultWithError());
+        assertTrue(managePage.checkResultWithError(),
+                "Должно быть сообщение-ошибка о покупке с нулевым количеством");
     }
 
     @Test
@@ -107,7 +115,8 @@ public class ManageProductPageTest extends BaseTest {
         mainPage.clickToManage();
         manageSetValue("5", "1", "1");
         managePage.buyClick();
-        assertTrue(managePage.checkResultWithError());
+        assertTrue(managePage.checkResultWithError(),
+                "Должно быть сообщение-ошибка о покупке с нулевым балансом");
     }
 
     @Test
@@ -118,7 +127,8 @@ public class ManageProductPageTest extends BaseTest {
         mainPage.clickToManage();
         manageSetValue("5", "1", "1");
         managePage.buyClick();
-        assertTrue(managePage.checkResultWithError());
+        assertTrue(managePage.checkResultWithError(),
+                "Должно быть сообщение-ошибка о покупке в чужой магазин");
     }
 
     @Test
@@ -129,7 +139,8 @@ public class ManageProductPageTest extends BaseTest {
         mainPage.clickToManage();
         manageSetValue("1", "1", "71");
         managePage.sellClick();
-        assertTrue(managePage.checkResultWithError());
+        assertTrue(managePage.checkResultWithError(),
+                "Должно быть сообщение-ошибка о продаже больше количества в наличии");
     }
 
     @Test
@@ -140,7 +151,8 @@ public class ManageProductPageTest extends BaseTest {
         mainPage.clickToManage();
         manageSetValue("1", "6", "1");
         managePage.sellClick();
-        assertTrue(managePage.checkResultWithError());
+        assertTrue(managePage.checkResultWithError(),
+                "Должно быть сообщение-ошибка о продаже с несуществующим ID продукта");
     }
 
     @Test
@@ -151,7 +163,8 @@ public class ManageProductPageTest extends BaseTest {
         mainPage.clickToManage();
         manageSetValue("69", "1", "1");
         managePage.sellClick();
-        assertTrue(managePage.checkResultWithError());
+        assertTrue(managePage.checkResultWithError(),
+                "Должно быть сообщение-ошибка о продаже из магазина с несуществующим ID");
     }
 
     @Test
@@ -162,7 +175,8 @@ public class ManageProductPageTest extends BaseTest {
         mainPage.clickToManage();
         manageSetValue("1", "1", "0");
         managePage.sellClick();
-        assertTrue(managePage.checkResultWithError());
+        assertTrue(managePage.checkResultWithError(),
+                "Должно быть сообщение-ошибка о продаже без наличия товара");
     }
 
     @Test
@@ -173,7 +187,8 @@ public class ManageProductPageTest extends BaseTest {
         mainPage.clickToManage();
         manageSetValue("5", "1", "1");
         managePage.sellClick();
-        assertTrue(managePage.checkResultWithError());
+        assertTrue(managePage.checkResultWithError(),
+                "Должно быть сообщение-ошибка о продаже из чужого магазина");
     }
 
     private void setSettingDriver() {

@@ -26,7 +26,8 @@ public class GetAllProductsPageTest extends BaseTest {
         allProductsPage.storeSetValue("Бедняга");
         allProductsPage.clickSubmit();
         assertEquals("Ошибка: Магазин пуст или его не существует",
-                allProductsPage.getAllProductsResult());
+                allProductsPage.getAllProductsResult(),
+                "Проверка соответствия текста ошибки");
     }
 
     private void setSettingDriver() {

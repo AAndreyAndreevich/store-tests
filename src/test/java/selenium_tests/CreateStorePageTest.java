@@ -25,7 +25,8 @@ public class CreateStorePageTest extends BaseTest {
         String name = "";
         mainPage.clickToCreateStore();
         createStorePage.enterStoreName(name);
-        assertTrue(createStorePage.checkResultWithError(name));
+        assertTrue(createStorePage.checkResultWithError(name),
+                "Должно вернуться сообщение об ошибке пустого значения");
     }
 
     @Test
@@ -36,7 +37,8 @@ public class CreateStorePageTest extends BaseTest {
         String name = "Пяточка";
         mainPage.clickToCreateStore();
         createStorePage.enterStoreName(name);
-        assertTrue(createStorePage.checkResultWithError(name));
+        assertTrue(createStorePage.checkResultWithError(name),
+                "Должно вернуться сообщение о занятом имени магазина");
     }
 
     private void setSettingDriver() {
