@@ -20,8 +20,6 @@ public class ManageProductPage extends BasePage {
     @FindBy(xpath = "//div[@id='manageProductResult']")
     private WebElement textResult;
 
-    private final String xpathTextResult = "//div[@id='manageProductResult']";
-
     public ManageProductPage(WebDriver driver) {
         super(driver);
     }
@@ -47,6 +45,7 @@ public class ManageProductPage extends BasePage {
     }
 
     public boolean checkResult(String operation, String product, String count, String store, String account) {
+        String xpathTextResult = "//div[@id='manageProductResult']";
         return driver.findElement(By.xpath(xpathTextResult+"//p[1]")).getText().equals(operation) &&
                 driver.findElement(By.xpath(xpathTextResult+"//p[2]")).getText().equals(product) &&
                 driver.findElement(By.xpath(xpathTextResult+"//p[3]")).getText().equals(count) &&

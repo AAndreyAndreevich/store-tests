@@ -20,7 +20,7 @@ public class LoginAndRegistrationPageTest extends BaseTest {
         logAndRegPage.clickRegistration();
         logAndRegPage.loginValue("testTest", "abcdefghijklmnopqrstuvwxyz12345");
         assertTrue(logAndRegPage.checkResultWithError(),
-                "Должно вернуться сообщение об ошибке, символов больше 30");
+                "Сообщение должно быть 'Пароль должен быть от 6 до 30 символов'");
     }
 
     @Test
@@ -30,7 +30,7 @@ public class LoginAndRegistrationPageTest extends BaseTest {
         logAndRegPage.clickRegistration();
         logAndRegPage.loginValue("testTest", "123");
         assertTrue(logAndRegPage.checkResultWithError(),
-                "Должно вернуться сообщение об ошибке, символов меньше 4");
+                "Сообщение должно быть 'Пароль должен быть от 6 до 30 символов'");
     }
 
     @Test
@@ -40,7 +40,7 @@ public class LoginAndRegistrationPageTest extends BaseTest {
         logAndRegPage.clickRegistration();
         logAndRegPage.loginValue("abcdefghijklmnopqrstu", "1234");
         assertTrue(logAndRegPage.checkResultWithError(),
-                "Должно вернуться сообщение об ошибке, символов больше 20");
+                "Сообщение должно быть 'Имя пользователя должно быть от 4 до 20 символов'");
     }
 
     @Test
@@ -50,7 +50,7 @@ public class LoginAndRegistrationPageTest extends BaseTest {
         logAndRegPage.clickRegistration();
         logAndRegPage.loginValue("testT", "1234");
         assertTrue(logAndRegPage.checkResultWithError(),
-                "Должно вернуться сообщение об ошибке, символов меньше 6");
+                "Сообщение должно быть 'Имя пользователя должно быть от 4 до 20 символов'");
     }
 
     @Test
@@ -58,28 +58,10 @@ public class LoginAndRegistrationPageTest extends BaseTest {
     public void usernameIsExistsTest() {
         setSettingDriver();
         logAndRegPage.clickRegistration();
-        logAndRegPage.loginValue("testuser", "testing");
+        logAndRegPage.loginValue("test", "testing");
         assertTrue(logAndRegPage.checkResultWithError(),
-                "Должно вернуться сообщение об ошибке, пользователь с данным именем зарегистрирован");
+                "Сообщение должно быть 'Пользователь с таким именем уже существует: test'");
     }
-
-//      Пока что нет никаких сообщений свидетельствующих о том что пользователь авторизировался или зарегистрировался,
-//      в текущий момент могу делать проверки на отображение элементов из меню которые доступны для авторизированных,
-//      но не хочу
-//    @Test
-//    @Description("Успешная авторизация")
-//    public void successLoginTest() {
-//        setSettingDriver();
-//        logAndRegPage.loginValue("testuser", "testing");
-//    }
-//
-//    @Test
-//    @Description("Успешная регистрация")
-//    public void successRegistrationTest() {
-//        setSettingDriver();
-//        logAndRegPage.clickRegistration();
-//        logAndRegPage.loginValue("testRegistration", "testing");
-//    }
 
     private void setSettingDriver() {
         driver.get(URL);

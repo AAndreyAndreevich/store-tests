@@ -21,24 +21,24 @@ public class CreateStorePageTest extends BaseTest {
     @Description("Попытка создать магазин с пустым названием")
     public void createStoreWithEmptyNameTest() {
         setSettingDriver();
-        loginAndRegPage.logInUser();
+        loginAndRegPage.logInTestUser();
         String name = "";
         mainPage.clickToCreateStore();
         createStorePage.enterStoreName(name);
         assertTrue(createStorePage.checkResultWithError(name),
-                "Должно вернуться сообщение об ошибке пустого значения");
+                "Сообщение должно быть 'Ошибка: Название магазина не может быть пустым'");
     }
 
     @Test
     @Description("Попытка создать магазин с занятым названием")
     public void createStoreWithBusyNameTest() {
         setSettingDriver();
-        loginAndRegPage.logInUser();
+        loginAndRegPage.logInTestUser();
         String name = "Пяточка";
         mainPage.clickToCreateStore();
         createStorePage.enterStoreName(name);
         assertTrue(createStorePage.checkResultWithError(name),
-                "Должно вернуться сообщение о занятом имени магазина");
+                "Сообщение должно быть 'Ошибка: Магазин с названием 'Пяточка' существует'");
     }
 
     private void setSettingDriver() {

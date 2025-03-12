@@ -21,7 +21,7 @@ public class ManageProductPageTest extends BaseTest {
     @Description("Покупка продукта")
     public void buyProductTest() {
         setSettingDriver();
-        loginAndRegPage.logInUser();
+        loginAndRegPage.logInTestUser();
         mainPage.clickToManage();
         manageSetValue("1", "1", "1");
         managePage.buyClick();
@@ -31,10 +31,10 @@ public class ManageProductPageTest extends BaseTest {
                         "Название продукта: Хлеб",
                         "Количество: 1",
                         "Магазин: Пяточка",
-                        "Пользователь: user"
+                        "Пользователь: test"
                 ),
                 "Проверяет соответствие результатов покупки," +
-                        "Должны быть 'Покупка продукта', 'Хлеб', '1' , 'Пяточка', 'user'"
+                        "Значения должны быть 'Покупка продукта', 'Хлеб', '1' , 'Пяточка', 'test'"
         );
     }
 
@@ -42,7 +42,7 @@ public class ManageProductPageTest extends BaseTest {
     @Description("Продажа продукта")
     public void sellProductTest() {
         setSettingDriver();
-        loginAndRegPage.logInUser();
+        loginAndRegPage.logInTestUser();
         mainPage.clickToManage();
         manageSetValue("1", "1", "1");
         managePage.sellClick();
@@ -52,10 +52,10 @@ public class ManageProductPageTest extends BaseTest {
                         "Название продукта: Хлеб",
                         "Количество: 1",
                         "Магазин: Пяточка",
-                        "Пользователь: user"
+                        "Пользователь: test"
                 ),
                 "Проверяет соответствие результатов покупки," +
-                        "Должны быть 'Продажа продукта', 'Хлеб', '1' , 'Пяточка', 'user'"
+                        "Значения должны быть 'Продажа продукта', 'Хлеб', '1' , 'Пяточка', 'test'"
         );
     }
 
@@ -63,48 +63,48 @@ public class ManageProductPageTest extends BaseTest {
     @Description("Попытка покупки с несуществующим ID продукта")
     public void buyProductWithNonexistentProductIdTest() {
         setSettingDriver();
-        loginAndRegPage.logInUser();
+        loginAndRegPage.logInTestUser();
         mainPage.clickToManage();
         manageSetValue("1", "6", "1");
         managePage.buyClick();
         assertTrue(managePage.checkResultWithError(),
-                "Должно быть сообщение-ошибка о покупке продукта с несуществующим ID");
+                "Сообщение должно быть 'Продукт не найден'");
     }
 
     @Test
     @Description("Попытка покупки с несуществующим ID магазина")
     public void buyProductWithNonexistentStoreIdTest() {
         setSettingDriver();
-        loginAndRegPage.logInUser();
+        loginAndRegPage.logInTestUser();
         mainPage.clickToManage();
         manageSetValue("69", "1", "1");
         managePage.buyClick();
         assertTrue(managePage.checkResultWithError(),
-                "Должно быть сообщение-ошибка о покупке в магазин несуществующим ID");
+                "Сообщение должно быть 'Магазин не найден'");
     }
 
     @Test
     @Description("Попытка покупки с превышением вместимости склада")
     public void buyProductWithExceedingLimitTest() {
         setSettingDriver();
-        loginAndRegPage.logInUser();
+        loginAndRegPage.logInTestUser();
         mainPage.clickToManage();
         manageSetValue("1", "1", "70");
         managePage.buyClick();
         assertTrue(managePage.checkResultWithError(),
-                "Должно быть сообщение-ошибка о превышении вместимости склада");
+                "Сообщение должно быть 'Превышена вместимость склада.'");
     }
 
     @Test
     @Description("Попытка покупки с нулевым количеством")
     public void buyProductWithZeroQuantityTest() {
         setSettingDriver();
-        loginAndRegPage.logInUser();
+        loginAndRegPage.logInTestUser();
         mainPage.clickToManage();
         manageSetValue("1", "1", "0");
         managePage.buyClick();
         assertTrue(managePage.checkResultWithError(),
-                "Должно быть сообщение-ошибка о покупке с нулевым количеством");
+                "Сообщение должно быть 'Количество не может быть равно или меньше нуля'");
     }
 
     @Test
@@ -116,79 +116,79 @@ public class ManageProductPageTest extends BaseTest {
         manageSetValue("5", "1", "1");
         managePage.buyClick();
         assertTrue(managePage.checkResultWithError(),
-                "Должно быть сообщение-ошибка о покупке с нулевым балансом");
+                "Сообщение должно быть 'Недостаточно средств на балансе для покупки'");
     }
 
     @Test
     @Description("Попытка покупки в чужой магазин")
     public void buyProductNotOwnStoreTest() {
         setSettingDriver();
-        loginAndRegPage.logInUser();
+        loginAndRegPage.logInTestUser();
         mainPage.clickToManage();
         manageSetValue("5", "1", "1");
         managePage.buyClick();
         assertTrue(managePage.checkResultWithError(),
-                "Должно быть сообщение-ошибка о покупке в чужой магазин");
+                "Сообщение должно быть 'Пользователю не принадлежит магазин'");
     }
 
     @Test
     @Description("Попытка продажи сверх лимит")
     public void sellProductExceedingLimitTest() {
         setSettingDriver();
-        loginAndRegPage.logInUser();
+        loginAndRegPage.logInTestUser();
         mainPage.clickToManage();
         manageSetValue("1", "1", "71");
         managePage.sellClick();
         assertTrue(managePage.checkResultWithError(),
-                "Должно быть сообщение-ошибка о продаже больше количества в наличии");
+                "Сообщение должно быть 'Превышен лимит количества продукта.'");
     }
 
     @Test
     @Description("Попытка продажи с несуществующим ID продукта")
     public void sellProductWithNonexistentProductIdTest() {
         setSettingDriver();
-        loginAndRegPage.logInUser();
+        loginAndRegPage.logInTestUser();
         mainPage.clickToManage();
         manageSetValue("1", "6", "1");
         managePage.sellClick();
         assertTrue(managePage.checkResultWithError(),
-                "Должно быть сообщение-ошибка о продаже с несуществующим ID продукта");
+                "Сообщение должно быть 'Продукт не найден'");
     }
 
     @Test
     @Description("Попытка продажи с несуществующим ID магазина")
     public void sellProductWithNonexistentStoreIdTest() {
         setSettingDriver();
-        loginAndRegPage.logInUser();
+        loginAndRegPage.logInTestUser();
         mainPage.clickToManage();
         manageSetValue("69", "1", "1");
         managePage.sellClick();
         assertTrue(managePage.checkResultWithError(),
-                "Должно быть сообщение-ошибка о продаже из магазина с несуществующим ID");
+                "Сообщение должно быть 'Магазин не найден'");
     }
 
     @Test
     @Description("Попытка продажи с нулевым количеством")
     public void sellProductWithZeroQuantityTest() {
         setSettingDriver();
-        loginAndRegPage.logInUser();
+        loginAndRegPage.logInTestUser();
         mainPage.clickToManage();
         manageSetValue("1", "1", "0");
         managePage.sellClick();
         assertTrue(managePage.checkResultWithError(),
-                "Должно быть сообщение-ошибка о продаже без наличия товара");
+                "Сообщение должно быть 'Превышен лимит количества продукта'");
     }
 
     @Test
     @Description("Попытка продажи из чужого магазина")
     public void sellProductNotOwnStoreTest() {
         setSettingDriver();
-        loginAndRegPage.logInUser();
+        loginAndRegPage.logInTestUser();
         mainPage.clickToManage();
         manageSetValue("5", "1", "1");
         managePage.sellClick();
         assertTrue(managePage.checkResultWithError(),
-                "Должно быть сообщение-ошибка о продаже из чужого магазина");
+                "Сообщение должно быть 'Пользователю не принадлежит магазин'");
     }
 
     private void setSettingDriver() {

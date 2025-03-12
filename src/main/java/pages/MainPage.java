@@ -12,6 +12,12 @@ public class MainPage extends BasePage {
     private WebElement getProductsButton;
     @FindBy(css = "a[href='/store/createStoreForm']")
     private WebElement createStoreButton;
+    @FindBy(css = "a[href='/store/changeStoreNameForm']")
+    private WebElement changeStoreNameButton;
+    @FindBy(css = "a[href='/changeName']")
+    private WebElement changeUsernameButton;
+    @FindBy(css = "a[href='/changePassword']")
+    private WebElement changePasswordButton;
 
     public MainPage(WebDriver driver) {
         super(driver);
@@ -27,6 +33,18 @@ public class MainPage extends BasePage {
 
     public void clickToCreateStore() {
         createStoreButton.click();
+    }
+
+    public void clickToChangeUsername() {
+        changeUsernameButton.click();
+    }
+
+    public void clickToChangeStoreName() {
+        changeStoreNameButton.click();
+    }
+
+    public void clickToChangePassword() {
+        changePasswordButton.click();
     }
 
 }

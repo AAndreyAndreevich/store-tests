@@ -49,8 +49,8 @@ public class LoginAndRegistrationPage {
         clickSubmit();
     }
 
-    public void logInUser() {
-        loginValue("user", "user");
+    public void logInTestUser() {
+        loginValue("test", "testtest");
     }
 
     public void logInNoStoreUser() {

@@ -21,13 +21,13 @@ public class GetAllProductsPageTest extends BaseTest {
     @Description("Попытка запросить список продуктов из пустого магазина")
     public void getProductListFromEmptyStoreTest() {
         setSettingDriver();
-        loginAndRegPage.logInUser();
+        loginAndRegPage.logInTestUser();
         mainPage.clickToProductsList();
         allProductsPage.storeSetValue("Бедняга");
         allProductsPage.clickSubmit();
         assertEquals("Ошибка: Магазин пуст или его не существует",
                 allProductsPage.getAllProductsResult(),
-                "Проверка соответствия текста ошибки");
+                "Сообщение должно быть 'Ошибка: Магазин пуст или его не существует'");
     }
 
     private void setSettingDriver() {
