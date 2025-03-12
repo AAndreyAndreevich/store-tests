@@ -1,6 +1,7 @@
 package selenium_tests;
 
 import io.qameta.allure.Description;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pages.GetAllProductsPage;
 import pages.LoginAndRegistrationPage;
@@ -15,12 +16,17 @@ public class GetAllProductsPageTest extends BaseTest {
     private LoginAndRegistrationPage loginAndRegPage;
     private GetAllProductsPage allProductsPage;
 
-    private final String URL = "http://localhost:8080/";
+    @BeforeEach
+    public void setSettingDriver() {
+        driver.get(URL);
+        mainPage = new MainPage(driver);
+        loginAndRegPage = new LoginAndRegistrationPage(driver);
+        allProductsPage = new GetAllProductsPage(driver);
+    }
 
     @Test
     @Description("Попытка запросить список продуктов из пустого магазина")
     public void getProductListFromEmptyStoreTest() {
-        setSettingDriver();
         loginAndRegPage.logInTestUser();
         mainPage.clickToProductsList();
         allProductsPage.storeSetValue("Бедняга");
@@ -30,10 +36,4 @@ public class GetAllProductsPageTest extends BaseTest {
                 "Сообщение должно быть 'Ошибка: Магазин пуст или его не существует'");
     }
 
-    private void setSettingDriver() {
-        driver.get(URL);
-        mainPage = new MainPage(driver);
-        loginAndRegPage = new LoginAndRegistrationPage(driver);
-        allProductsPage = new GetAllProductsPage(driver);
-    }
 }

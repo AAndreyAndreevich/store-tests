@@ -1,6 +1,7 @@
 package selenium_tests;
 
 import io.qameta.allure.Description;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pages.CreateStorePage;
 import pages.LoginAndRegistrationPage;
@@ -15,12 +16,17 @@ public class CreateStorePageTest extends BaseTest {
     private LoginAndRegistrationPage loginAndRegPage;
     private MainPage mainPage;
 
-    private final String URL = "http://localhost:8080/";
+    @BeforeEach
+    public void setSettingDriver() {
+        driver.get(URL);
+        createStorePage = new CreateStorePage(driver);
+        loginAndRegPage = new LoginAndRegistrationPage(driver);
+        mainPage = new MainPage(driver);
+    }
 
     @Test
     @Description("Попытка создать магазин с пустым названием")
     public void createStoreWithEmptyNameTest() {
-        setSettingDriver();
         loginAndRegPage.logInTestUser();
         String name = "";
         mainPage.clickToCreateStore();
@@ -32,7 +38,6 @@ public class CreateStorePageTest extends BaseTest {
     @Test
     @Description("Попытка создать магазин с занятым названием")
     public void createStoreWithBusyNameTest() {
-        setSettingDriver();
         loginAndRegPage.logInTestUser();
         String name = "Пяточка";
         mainPage.clickToCreateStore();
@@ -41,10 +46,5 @@ public class CreateStorePageTest extends BaseTest {
                 "Сообщение должно быть 'Ошибка: Магазин с названием 'Пяточка' существует'");
     }
 
-    private void setSettingDriver() {
-        driver.get(URL);
-        createStorePage = new CreateStorePage(driver);
-        loginAndRegPage = new LoginAndRegistrationPage(driver);
-        mainPage = new MainPage(driver);
-    }
+
 }

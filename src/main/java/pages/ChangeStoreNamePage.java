@@ -33,16 +33,16 @@ public class ChangeStoreNamePage extends BasePage {
                 driver.findElement(By.xpath(xpathResult + "//p[3]")).getText().equals(storeName);
     }
 
-    public boolean checkResultWithError() {
+    public boolean checkResultWithError(String name) {
         String error = "Ошибка: ";
         return result.getText().equals(error + "Название магазина не может быть пустым") ||
-                result.getText().contains(error + "Магазин с названием '' существует") ||
+                result.getText().contains(error + "Магазин с названием '"+name+"' существует") ||
                 result.getText().equals(error + "Пользователь не найден") ||
                 result.getText().equals(error + "Название магазина не может быть пустым") ||
                 result.getText().equals(error + "Пользователь не найден") ||
                 result.getText().equals(error + "Название не может совпадать") ||
                 result.getText().equals(error + "Пользователю не принадлежит магазин") ||
                 result.getText().equals(error + "Название магазина должно быть от 3 до 30 символов") ||
-                result.getText().contains(error + "Магазин с названием '' не найден");
+                result.getText().contains(error + "Магазин с названием '"+name+"' не найден");
     }
 }

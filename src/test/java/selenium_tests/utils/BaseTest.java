@@ -11,6 +11,7 @@ import java.time.Duration;
 public class BaseTest {
 
     protected WebDriver driver;
+    protected final String URL = "http://localhost:8080/";
 
     @BeforeEach
     public void setUp() {

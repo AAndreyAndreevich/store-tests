@@ -1,6 +1,7 @@
 package selenium_tests;
 
 import io.qameta.allure.Description;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pages.LoginAndRegistrationPage;
 import pages.MainPage;
@@ -15,12 +16,17 @@ public class ManageProductPageTest extends BaseTest {
     private LoginAndRegistrationPage loginAndRegPage;
     private ManageProductPage managePage;
 
-    private final String URL = "http://localhost:8080/";
+    @BeforeEach
+    public void setSettingDriver() {
+        driver.get(URL);
+        mainPage = new MainPage(driver);
+        loginAndRegPage = new LoginAndRegistrationPage(driver);
+        managePage = new ManageProductPage(driver);
+    }
 
     @Test
     @Description("Покупка продукта")
     public void buyProductTest() {
-        setSettingDriver();
         loginAndRegPage.logInTestUser();
         mainPage.clickToManage();
         manageSetValue("1", "1", "1");
@@ -41,7 +47,6 @@ public class ManageProductPageTest extends BaseTest {
     @Test
     @Description("Продажа продукта")
     public void sellProductTest() {
-        setSettingDriver();
         loginAndRegPage.logInTestUser();
         mainPage.clickToManage();
         manageSetValue("1", "1", "1");
@@ -62,7 +67,6 @@ public class ManageProductPageTest extends BaseTest {
     @Test
     @Description("Попытка покупки с несуществующим ID продукта")
     public void buyProductWithNonexistentProductIdTest() {
-        setSettingDriver();
         loginAndRegPage.logInTestUser();
         mainPage.clickToManage();
         manageSetValue("1", "6", "1");
@@ -74,7 +78,6 @@ public class ManageProductPageTest extends BaseTest {
     @Test
     @Description("Попытка покупки с несуществующим ID магазина")
     public void buyProductWithNonexistentStoreIdTest() {
-        setSettingDriver();
         loginAndRegPage.logInTestUser();
         mainPage.clickToManage();
         manageSetValue("69", "1", "1");
@@ -86,7 +89,6 @@ public class ManageProductPageTest extends BaseTest {
     @Test
     @Description("Попытка покупки с превышением вместимости склада")
     public void buyProductWithExceedingLimitTest() {
-        setSettingDriver();
         loginAndRegPage.logInTestUser();
         mainPage.clickToManage();
         manageSetValue("1", "1", "70");
@@ -98,7 +100,6 @@ public class ManageProductPageTest extends BaseTest {
     @Test
     @Description("Попытка покупки с нулевым количеством")
     public void buyProductWithZeroQuantityTest() {
-        setSettingDriver();
         loginAndRegPage.logInTestUser();
         mainPage.clickToManage();
         manageSetValue("1", "1", "0");
@@ -110,7 +111,6 @@ public class ManageProductPageTest extends BaseTest {
     @Test
     @Description("Попытка покупки с нулевым балансом")
     public void buyProductWithZeroBalanceTest() {
-        setSettingDriver();
         loginAndRegPage.logInNoBalanceUser();
         mainPage.clickToManage();
         manageSetValue("5", "1", "1");
@@ -122,7 +122,6 @@ public class ManageProductPageTest extends BaseTest {
     @Test
     @Description("Попытка покупки в чужой магазин")
     public void buyProductNotOwnStoreTest() {
-        setSettingDriver();
         loginAndRegPage.logInTestUser();
         mainPage.clickToManage();
         manageSetValue("5", "1", "1");
@@ -134,7 +133,6 @@ public class ManageProductPageTest extends BaseTest {
     @Test
     @Description("Попытка продажи сверх лимит")
     public void sellProductExceedingLimitTest() {
-        setSettingDriver();
         loginAndRegPage.logInTestUser();
         mainPage.clickToManage();
         manageSetValue("1", "1", "71");
@@ -146,7 +144,6 @@ public class ManageProductPageTest extends BaseTest {
     @Test
     @Description("Попытка продажи с несуществующим ID продукта")
     public void sellProductWithNonexistentProductIdTest() {
-        setSettingDriver();
         loginAndRegPage.logInTestUser();
         mainPage.clickToManage();
         manageSetValue("1", "6", "1");
@@ -158,7 +155,6 @@ public class ManageProductPageTest extends BaseTest {
     @Test
     @Description("Попытка продажи с несуществующим ID магазина")
     public void sellProductWithNonexistentStoreIdTest() {
-        setSettingDriver();
         loginAndRegPage.logInTestUser();
         mainPage.clickToManage();
         manageSetValue("69", "1", "1");
@@ -170,7 +166,6 @@ public class ManageProductPageTest extends BaseTest {
     @Test
     @Description("Попытка продажи с нулевым количеством")
     public void sellProductWithZeroQuantityTest() {
-        setSettingDriver();
         loginAndRegPage.logInTestUser();
         mainPage.clickToManage();
         manageSetValue("1", "1", "0");
@@ -182,20 +177,12 @@ public class ManageProductPageTest extends BaseTest {
     @Test
     @Description("Попытка продажи из чужого магазина")
     public void sellProductNotOwnStoreTest() {
-        setSettingDriver();
         loginAndRegPage.logInTestUser();
         mainPage.clickToManage();
         manageSetValue("5", "1", "1");
         managePage.sellClick();
         assertTrue(managePage.checkResultWithError(),
                 "Сообщение должно быть 'Пользователю не принадлежит магазин'");
-    }
-
-    private void setSettingDriver() {
-        driver.get(URL);
-        mainPage = new MainPage(driver);
-        loginAndRegPage = new LoginAndRegistrationPage(driver);
-        managePage = new ManageProductPage(driver);
     }
 
     private void manageSetValue(String storeId, String productId, String count) {
